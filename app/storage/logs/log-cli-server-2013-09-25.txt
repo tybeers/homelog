@@ -1,0 +1,35 @@
+[2013-09-25 14:27:58] log.ERROR: exception 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' in /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php:1429
+Stack trace:
+#0 /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(1050): Illuminate\Routing\Router->handleRoutingException(Object(Symfony\Component\Routing\Exception\ResourceNotFoundException))
+#1 /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(1014): Illuminate\Routing\Router->findRoute(Object(Illuminate\Http\Request))
+#2 /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(530): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#3 /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(506): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#4 /home/tbeers/projects/angular/laravel/public/index.php(49): Illuminate\Foundation\Application->run()
+#5 /home/tbeers/projects/angular/laravel/server.php(19): require_once('/home/tbeers/pr...')
+#6 {main} [] []
+[2013-09-25 14:29:05] log.ERROR: exception 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' in /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php:1429
+Stack trace:
+#0 /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(1050): Illuminate\Routing\Router->handleRoutingException(Object(Symfony\Component\Routing\Exception\ResourceNotFoundException))
+#1 /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(1014): Illuminate\Routing\Router->findRoute(Object(Illuminate\Http\Request))
+#2 /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(530): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#3 /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(506): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#4 /home/tbeers/projects/angular/laravel/public/index.php(49): Illuminate\Foundation\Application->run()
+#5 /home/tbeers/projects/angular/laravel/server.php(19): require_once('/home/tbeers/pr...')
+#6 {main} [] []
+[2013-09-25 14:45:35] log.ERROR: exception 'Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException' in /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php:1439
+Stack trace:
+#0 /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(1050): Illuminate\Routing\Router->handleRoutingException(Object(Symfony\Component\Routing\Exception\MethodNotAllowedException))
+#1 /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Routing/Router.php(1014): Illuminate\Routing\Router->findRoute(Object(Illuminate\Http\Request))
+#2 /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(530): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#3 /home/tbeers/projects/angular/laravel/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(506): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#4 /home/tbeers/projects/angular/laravel/public/index.php(49): Illuminate\Foundation\Application->run()
+#5 /home/tbeers/projects/angular/laravel/server.php(19): require_once('/home/tbeers/pr...')
+#6 {main} [] []
+[2013-09-25 14:47:17] log.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to undefined function json()' in /home/tbeers/projects/angular/laravel/app/controllers/AuthController.php:6
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2013-09-25 14:54:16] log.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Repsonse' not found' in /home/tbeers/projects/angular/laravel/app/controllers/AuthController.php:15
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
