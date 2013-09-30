@@ -16,5 +16,8 @@ Route::get('/', function()
 	return View::make('singlepage');
 });
 
-Route::post('auth/login', 'AuthController@login');
+Route::post('/auth/login', 'AuthController@login');
 Route::get('/auth/logout', 'AuthController@logout');
+
+Route::any('/servicetypes','ServiceController@getServiceTypes');
+Route::post('/servicetypes/add','ServiceController@addServiceType');

@@ -1,0 +1,21 @@
+<h2>Service Types</h2>
+<ul class="servicetypes">
+  <li class="panel" ng-repeat="servicetype in servicetypes">
+    {{ servicetype.name }} created {{ servicetype.created_at }}
+  </li>
+</ul>
+    <form ng-submit="addServiceType()">
+      <fieldset class="radius">
+        <div class="row">
+          <div class="large-6 columns">
+            <input type="text" name="name" placeholder="name" ng-model="usertypes.name" required/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="small-3 columns">
+            <button type="submit" class="button large expand radius">Submit</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>

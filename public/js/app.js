@@ -47,12 +47,22 @@ app.config(function($routeProvider) {
     }
   });
 
+   $routeProvider.when('/servicetypes', {
+    templateUrl: 'templates/servicetypes.html',
+    controller: 'servicetypesController',
+    resolve: {
+      servicetypes : function(servicetypesService) {
+        return servicetypesService.get();
+      }
+    }
+  });
+
   $routeProvider.otherwise({ redirectTo: '/login' });
 
 });
 
 app.run(function($rootScope, $location, AuthenticationService, FlashService) {
-  var routesThatRequireAuth = ['/home'];
+  var routesThatRequireAuth = ['/home','/servicetypes'];
 
   $rootScope.$on('$routeChangeStart', function(event, next, current) {
     if(_(routesThatRequireAuth).contains($location.path()) && !AuthenticationService.isLoggedIn()) {
@@ -68,6 +78,24 @@ app.factory("BookService", function($http) {
       return $http.get('/books');
     }
   };
+});
+
+app.factory("servicetypesService", function($http,FlashService) {
+	var refreshList   = function() {
+		servicetypeService.get();
+	};
+
+	return {
+		get: function() {
+			return $http.get('/servicetypes');
+		},
+		addType: function(usertypes) {
+			var addType = $http.post("/servicetypes/add", usertypes);
+		        addType.success(FlashService.show("Added"));
+      			addType.error(FlashService.show("OOPS!"));
+			return addType;
+		}
+	};
 });
 
 app.factory("FlashService", function($rootScope) {
@@ -141,13 +169,24 @@ app.controller("LoginController", function($scope, $location, AuthenticationServ
 
   $scope.login = function() {
     AuthenticationService.login($scope.credentials).success(function() {
-      $location.path('/home');
+      $location.path('/servicetypes');
     });
   };
 });
 
 app.controller("BooksController", function($scope, books) {
   $scope.books = books.data;
+});
+
+app.controller("servicetypesController",function($scope, $location, servicetypes, servicetypesService) {
+	$scope.servicetypes = servicetypes.data;
+	$scope.usertypes = { name: "" };
+	
+	$scope.addServiceType = function() {
+		servicetypesService.addType($scope.usertypes).success(function() {
+			$location.path('/servicetypes');
+		});
+        }; 
 });
 
 app.controller("HomeController", function($scope, $location, AuthenticationService) {
