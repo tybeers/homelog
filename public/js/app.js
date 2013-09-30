@@ -80,20 +80,31 @@ app.factory("BookService", function($http) {
   };
 });
 
-app.factory("servicetypesService", function($http,FlashService) {
+app.factory("servicetypesService", function($http,$q,FlashService) {
 	var refreshList   = function() {
 		servicetypeService.get();
 	};
+	var deffered = $q.defer();
+	var data = [];
 
 	return {
 		get: function() {
 			return $http.get('/servicetypes');
 		},
 		addType: function(usertypes) {
-			var addType = $http.post("/servicetypes/add", usertypes);
-		        addType.success(FlashService.show("Added"));
-      			addType.error(FlashService.show("OOPS!"));
-			return addType;
+			var addType = $http.post("/servicetypes/add", usertypes).success(function(d) {
+				data = d;
+				console.log(d);
+				deffered.resolve();
+			});
+			return deffered.promise;
+		},
+		data: function() { 
+			return data; 
+		},
+		reset: function() {
+			data = [];
+			return data;
 		}
 	};
 });
@@ -180,11 +191,13 @@ app.controller("BooksController", function($scope, books) {
 
 app.controller("servicetypesController",function($scope, $location, servicetypes, servicetypesService) {
 	$scope.servicetypes = servicetypes.data;
-	$scope.usertypes = { name: "" };
+	$scope.usertypes = { name: "", created_at: "" };
 	
 	$scope.addServiceType = function() {
-		servicetypesService.addType($scope.usertypes).success(function() {
-			$location.path('/servicetypes');
+		servicetypesService.addType($scope.usertypes).then(function() { 
+			$scope.servicetypes.push(servicetypesService.data());
+			$scope.usertypes = { name: "", created_at: "" };
+			servicetypesService.reset();
 		});
         }; 
 });
