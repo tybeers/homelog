@@ -1,3 +1,4 @@
+<div ng-include=" 'templates/menu.html' "></div>
 <div id="home" class="row">
   <div class="large-6 large-offset-3">
     <h2>{{ title }}</h2>
@@ -12,11 +13,6 @@
         <img class="th" src="img/demo2.jpg" shows-message-when-hovered message="Family Maint.">
       </li>
     </ul>
-
-    <div class="row">
-      <div class="large-12 columns">
-        <button class="button large expand radius" ng-click="logout()">Log Out</button>
-      </div>
-    </div>
+  <div ng-include=" 'templates/footer.html' "></div>
   </div>
 </div>
