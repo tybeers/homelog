@@ -80,31 +80,25 @@ app.factory("BookService", function($http) {
   };
 });
 
-app.factory("servicetypesService", function($http,$q,FlashService) {
+app.factory("servicetypesService", function($http,FlashService) {
 	var refreshList   = function() {
 		servicetypeService.get();
 	};
-	var deffered = $q.defer();
-	var data = [];
 
 	return {
 		get: function() {
 			return $http.get('/servicetypes');
 		},
 		addType: function(usertypes) {
-			var addType = $http.post("/servicetypes/add", usertypes).success(function(d) {
-				data = d;
+			var promise = $http.post("/servicetypes/add", usertypes).then(function(d) {
 				console.log(d);
-				deffered.resolve();
+				return d.data;
 			});
-			return deffered.promise;
+			return promise;
 		},
-		data: function() { 
-			return data; 
-		},
-		reset: function() {
-			data = [];
-			return data;
+		deleteType: function(stype_id) {
+			var delType = $http.post("/servicetypes/delete",stype_id)
+			return delType;
 		}
 	};
 });
@@ -180,7 +174,7 @@ app.controller("LoginController", function($scope, $location, AuthenticationServ
 
   $scope.login = function() {
     AuthenticationService.login($scope.credentials).success(function() {
-      $location.path('/servicetypes');
+      $location.path('/home');
     });
   };
 });
@@ -194,17 +188,24 @@ app.controller("servicetypesController",function($scope, $location, servicetypes
 	$scope.usertypes = { name: "", created_at: "" };
 	
 	$scope.addServiceType = function() {
-		servicetypesService.addType($scope.usertypes).then(function() { 
-			$scope.servicetypes.push(servicetypesService.data());
-			$scope.usertypes = { name: "", created_at: "" };
-			servicetypesService.reset();
+		 servicetypesService.addType($scope.usertypes).then(function(d) {
+			 $scope.servicetypes.push(d);
+			 $scope.usertypes = { name: "", created_at: "" };
 		});
         }; 
+
+	$scope.delete = function ( idx ) {
+  		var stype_to_delete = $scope.servicetypes[idx];
+
+ 		servicetypesService.deleteType(stype_to_delete).success(function () {
+    			$scope.servicetypes.splice(idx, 1);
+  		});
+	};
 });
 
 app.controller("HomeController", function($scope, $location, AuthenticationService) {
-  $scope.title = "Awesome Home";
-  $scope.message = "Mouse Over these images to see a directive at work!";
+  $scope.title = "Choose your adventure";
+  $scope.message = "Click image to maintain";
 
   $scope.logout = function() {
     AuthenticationService.logout().success(function() {

@@ -7,11 +7,6 @@ class ServiceController extends BaseController {
 	}
 
 	public function addServiceType() {
-		/*if (DB::insert('insert into servicetypes (name) values (?)', array(Input::json('name')))) {
-			return  Response::json(array('flash'=>'Success'));
-		} else {
-			return Response::json(array('flash'=>'Insert Failed'),500);
-		}*/
 		try {
 			$stype = new Servicetype();
 			$stype->name = Input::json('name');
@@ -21,5 +16,12 @@ class ServiceController extends BaseController {
 			return Response::json(array('flash'=>'Insert Failed'),500);
 		}
 	}
-
+	public function delServiceType() {
+		try {
+			$stype = DB::table('servicetypes')->where('id','=',Input::json('id'))->delete();
+			return Response::json(array('flash'=>'Deleted'));
+		} catch (Exception $e) {
+			 return Response::json(array('flash'=>'Delete Failed'),500);
+		}
+	}
 }

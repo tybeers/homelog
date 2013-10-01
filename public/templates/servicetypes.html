@@ -1,13 +1,22 @@
 <h2>Service Types</h2>
+<div class="row">
+<div class="large-12">
 <ul class="servicetypes">
   <li class="panel" ng-repeat="servicetype in servicetypes">
-    {{ servicetype.name }} created {{ servicetype.created_at }}
+    <div class="small-6 small-6 columns">
+	{{ servicetype.name }} created {{ servicetype.created_at }}
+    </div>
+    <div class="small-2 small-2 columns">	
+	<a class="delButton" ng-click="delete($index)">Delete</a>
+    </div>
   </li>
+</div>
 </ul>
+</div>
     <form ng-submit="addServiceType()">
       <fieldset class="radius">
         <div class="row">
-          <div class="large-6 columns">
+          <div class="small-3 columns">
             <input type="text" name="name" placeholder="name" ng-model="usertypes.name" required/>
           </div>
         </div>
