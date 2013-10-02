@@ -24,3 +24,5 @@ Route::post('/servicetypes/add','ServiceController@addServiceType');
 Route::post('/servicetypes/delete','ServiceController@delServiceType');
 
 Route::any('/services','ServiceController@getServices');
+
+Route::any('/providers','ProviderController@getProviders');

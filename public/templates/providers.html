@@ -1,0 +1,12 @@
+<div ng-include=" 'templates/menu.html' "></div>
+<h2>History</h2>
+
+<ul class="providers">
+  <li class="panel" ng-repeat="provider in providers">
+    {{ provider.name }}: {{ provider.email }} - {{ provider.website }}
+  </li>
+</ul>
+
+<div class="large-6 large-offset-3">
+  <div ng-include=" 'templates/footer.html' "></div>
+</div>

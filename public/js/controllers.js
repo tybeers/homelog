@@ -14,8 +14,8 @@ app.controller("LoginController", function($scope, $location, AuthenticationServ
   };
 });
 
-app.controller("BooksController", function($scope, books) {
-  $scope.books = books.data;
+app.controller("ProvidersController", function($scope, providers) {
+  $scope.providers = providers.data;
 });
 
 app.controller("servicetypesController",function($scope, servicetypes, servicetypesService) {

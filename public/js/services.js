@@ -3,10 +3,10 @@
 var app = angular.module('services', []).
   value('version', '0.1');
 
-app.factory("BookService", function($http) {
+app.factory("ProviderService", function($http) {
   return {
     get: function() {
-      return $http.get('/books');
+      return $http.get('/providers');
     }
   };
 });

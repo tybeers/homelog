@@ -2,7 +2,7 @@
 <html lang="en" ng-app="app">
 <head>
   <meta charset="UTF-8">
-  <title>Homelog</title>
+  <title>Maint Log</title>
   <link rel="stylesheet" href="/css/normalize.css">
   <link rel="stylesheet" href="/css/foundation.min.css">
   <link rel="stylesheet" href="/css/style.css">
@@ -23,7 +23,7 @@
 <body>
   <div class="row">
     <div class="large-12">
-      <h1>Home Log</h1>
+      <h1>Maintenance Log</h1>
       <div class="row">
         <div class="large-6 large-offset-3">
           <div id="flash" class="alert-box alert" ng-show="flash">

@@ -37,12 +37,12 @@ app.config(function($routeProvider) {
     controller: 'HomeController'
   });
 
-  $routeProvider.when('/books', {
-    templateUrl: 'templates/books.html',
-    controller: 'BooksController',
+  $routeProvider.when('/providers', {
+    templateUrl: 'templates/providers.html',
+    controller: 'ProvidersController',
     resolve: {
-      books : function(BookService) {
-        return BookService.get();
+      providers : function(ProviderService) {
+        return ProviderService.get();
       }
     }
   });
