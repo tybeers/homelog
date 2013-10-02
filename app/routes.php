@@ -22,3 +22,5 @@ Route::get('/auth/logout', 'AuthController@logout');
 Route::any('/servicetypes','ServiceController@getServiceTypes');
 Route::post('/servicetypes/add','ServiceController@addServiceType');
 Route::post('/servicetypes/delete','ServiceController@delServiceType');
+
+Route::any('/services','ServiceController@getServices');

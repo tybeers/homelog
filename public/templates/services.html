@@ -1,0 +1,48 @@
+<div ng-include=" 'templates/menu.html' "></div>
+<h2>Maint History</h2>
+<div class="row">
+<div class="large-12">
+
+<angular-table model="services" 
+    default-sort-column="end_date">
+    <header-row>
+        <header-column sortable="true" sort-field-name="start_date">
+            <div style="display: inline-block;">Started</div>
+            <sort-arrow-ascending></sort-arrow-ascending>
+            <sort-arrow-descending></sort-arrow-descending>
+        </header-column>
+        <header-column sortable="true" sort-field-name="end_date">
+            <div style="display: inline-block;">Finished</div>
+            <sort-arrow-ascending></sort-arrow-ascending>
+            <sort-arrow-descending></sort-arrow-descending>
+        </header-column>
+        <header-column sortable="true" sort-field-name="cost">
+            <div style="display: inline-block;">Cost</div>
+            <sort-arrow-ascending></sort-arrow-ascending>
+            <sort-arrow-descending></sort-arrow-descending>
+        </header-column>
+	<header-column sortable="true" sort-field-name="servicetype.name">
+            <div style="display: inline-block;">Type</div>
+            <sort-arrow-ascending></sort-arrow-ascending>
+            <sort-arrow-descending></sort-arrow-descending>
+        </header-column>
+        <header-column sortable="true" sort-field-name="notes">
+            <div style="display: inline-block;">Note</div>
+            <sort-arrow-ascending></sort-arrow-ascending>
+            <sort-arrow-descending></sort-arrow-descending>
+        </header-column>
+    </header-row>
+
+    <row on-selected="handleRowSelection(row)" selected-color="#87cefa" 
+        even-color="#ffffff" odd-color="#eeeeee">
+        <column>{{ row.start_date }}</column>
+        <column>{{ row.end_date }}</column>
+	<column>{{ row.cost | currency }}</column>
+	<column>{{ row.servicetype.name }}</column>
+        <column>{{ row.notes }}</input></column>
+    </row>
+</angular-table>
+</div>
+<div class="large-6 large-offset-3">
+  <div ng-include=" 'templates/footer.html' "></div>
+</div>

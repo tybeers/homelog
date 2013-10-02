@@ -18,7 +18,7 @@ app.controller("BooksController", function($scope, books) {
   $scope.books = books.data;
 });
 
-app.controller("servicetypesController",function($scope, $location, servicetypes, servicetypesService) {
+app.controller("servicetypesController",function($scope, servicetypes, servicetypesService) {
         $scope.servicetypes = servicetypes.data;
         $scope.usertypes = { name: "", created_at: "" };
 
@@ -36,6 +36,11 @@ app.controller("servicetypesController",function($scope, $location, servicetypes
                         $scope.servicetypes.splice(idx, 1);
                 });
         };
+});
+
+app.controller("servicesController",function($scope, services, servicesService) {
+	$scope.services = services.data;
+
 });
 
 app.controller("HomeController", function($scope, $location, AuthenticationService) {

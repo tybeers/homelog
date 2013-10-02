@@ -24,4 +24,12 @@ class ServiceController extends BaseController {
 			 return Response::json(array('flash'=>'Delete Failed'),500);
 		}
 	}
+
+
+	public function getServices() {
+                //return Response::json(DB::table('services')->get());
+		return Response::json(Service::with('servicetype')->get());
+		/*$output['services'] = Service::with('servicetype')->get()->toArray();
+		return $output;*/
+        }
 }

@@ -13,7 +13,7 @@ app.factory("BookService", function($http) {
 
 app.factory("servicetypesService", function($http,FlashService) {
         var refreshList   = function() {
-                servicetypeService.get();
+                servicetypesService.get();
         };
 
         return {
@@ -32,6 +32,18 @@ app.factory("servicetypesService", function($http,FlashService) {
                         return delType;
                 }
         };
+});
+
+app.factory("servicesService", function($http,FlashService) {
+	var refreshList   = function() {
+                servicesService.get();
+        };
+
+	return {
+                get: function() {
+                        return $http.get('/services');
+                }
+	};
 });
 
 app.factory("FlashService", function($rootScope) {

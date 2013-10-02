@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngSanitize','services','controllers','directives']);
+var app = angular.module("app", ['ngSanitize','services','controllers','directives','angular-table']);
 
 app.config(function($httpProvider) {
 
@@ -56,6 +56,17 @@ app.config(function($routeProvider) {
       }
     }
   });
+
+   $routeProvider.when('/services', {
+    templateUrl: 'templates/services.html',
+    controller: 'servicesController',
+    resolve: {
+      services : function(servicesService) {
+        return servicesService.get();
+      }
+    }
+  });
+
 
   $routeProvider.otherwise({ redirectTo: '/login' });
 
