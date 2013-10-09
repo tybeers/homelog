@@ -21,4 +21,9 @@ class Service extends Eloquent {
         {
         	return $this->belongsTo('Servicetype', 'service_type_id');
         }
+
+        public function provider()
+        {
+                return $this->belongsTo('Provider','provider_id');
+        }
 }

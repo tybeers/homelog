@@ -1,13 +1,13 @@
 <?php
 
-class Servicetype extends Eloquent {
+class Rating extends Eloquent {
 
         /**
          * The database table used by the model.
          *
          * @var string
          */
-        protected $table = 'servicetypes';
+        protected $table = 'ratings';
 
         /**
          * The attributes excluded from the model's JSON form.
@@ -16,8 +16,8 @@ class Servicetype extends Eloquent {
          */
         protected $hidden = array();
 
-	    public function service()
+	    public function provider()
     	{
-        	return $this->hasMany('Service','service_type_id');
+        	return $this->hasMany('Provider','rating_id');
     	}
 }

@@ -27,9 +27,23 @@ class ServiceController extends BaseController {
 
 
 	public function getServices() {
-                //return Response::json(DB::table('services')->get());
-		return Response::json(Service::with('servicetype')->get());
-		/*$output['services'] = Service::with('servicetype')->get()->toArray();
-		return $output;*/
+		return Response::json(Service::with('servicetype','provider')->get());
         }
+
+    public function addService() {
+    	try {
+    		$serv = new Service();
+    		$serv->notes = Input::json('note');
+    		$serv->service_type_id = Input::json('stype');
+    		$serv->provider_id = Input::json('provider');
+    		$serv->start_date = Input::json('start');
+    		$serv->end_date = Input::json('end');
+    		$serv->cost = Input::json('cost');
+    		$serv->save();
+    		return Response::json($serv);
+    	} catch (Exception $e) {
+    		return Response::json(array('flash'=>'Insert Failed'),500);
+    	}
+
+    }
 }

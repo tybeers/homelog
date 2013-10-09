@@ -1,6 +1,11 @@
 <div ng-include=" 'templates/menu.html' "></div>
 <h2>History</h2>
 <div class="row">
+    <div class="small-2 small-offset-10 columns">
+        <button ng-controller="HomeController" ng-click="go('/newservice')" class="button small expand radius">Add New</button>
+    </div>
+</div>
+<div class="row">
 <div class="large-12">
 
 <angular-table model="services" 
@@ -13,6 +18,11 @@
         </header-column>
         <header-column sortable="true" sort-field-name="end_date">
             <div style="display: inline-block;">Finished</div>
+            <sort-arrow-ascending></sort-arrow-ascending>
+            <sort-arrow-descending></sort-arrow-descending>
+        </header-column>
+        <header-column sortable="true" sort-field-name="provider.name">
+            <div style="display: inline-block;">Provider</div>
             <sort-arrow-ascending></sort-arrow-ascending>
             <sort-arrow-descending></sort-arrow-descending>
         </header-column>
@@ -37,6 +47,7 @@
         even-color="#ffffff" odd-color="#eeeeee">
         <column>{{ row.start_date }}</column>
         <column>{{ row.end_date }}</column>
+        <column>{{ row.provider.name }}</column>
 	<column>{{ row.cost | currency }}</column>
 	<column>{{ row.servicetype.name }}</column>
         <column>{{ row.notes }}</input></column>

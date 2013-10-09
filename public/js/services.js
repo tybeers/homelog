@@ -3,7 +3,7 @@
 var app = angular.module('services', []).
   value('version', '0.1');
 
-app.factory("ProviderService", function($http) {
+app.factory("providersService", function($http) {
   return {
     get: function() {
       return $http.get('/providers');
@@ -42,6 +42,10 @@ app.factory("servicesService", function($http,FlashService) {
 	return {
                 get: function() {
                         return $http.get('/services');
+                },
+                addService: function(userservice) {
+                  var addService = $http.post("/services/add", userservice);
+                  return addService;
                 }
 	};
 });

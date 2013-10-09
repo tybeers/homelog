@@ -1,0 +1,50 @@
+<h2>New Service</h2>
+<div class="row">
+    <form  ng-submit="addService()">
+      <fieldset class="radius">
+        <div class="row">
+          <div class="large-7 large-centered columns">
+            <div class="row">
+              <div class="large-5 large-7 columns">
+                <label>Service Type:</label>
+                <select ng-model="userservice.stype" ng-options="item.id as item.name for item in testTypes"> </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-5 large-7 columns">
+                <label>Started:</label>
+                <input type="date" name="start" placeholder="start" ng-model="userservice.start" required/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-5 large-7 columns">
+                <label>Finished:</label>
+                <input type="date" name="end" placeholder="end" ng-model="userservice.end" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-5 large-7 columns">
+                <label>Provider:</label>
+                <select ng-model="userservice.provider" ng-options="prov.id as prov.name for prov in providerList"></select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-5 large-7 columns">
+                <label>Cost:</label>
+                <input type="float" name="cost" placeholder="cost" ng-model="userservice.cost" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-5 large-7 columns">
+                <label>Notes:</label>
+                <textarea ng-model="userservice.note"></textarea>
+              </div>
+            </div>
+            <div class="small-3 columns">
+              <button type="submit" class="button large expand radius">Submit</button>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+</div>

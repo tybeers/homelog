@@ -14,7 +14,7 @@ app.controller("LoginController", function($scope, $location, AuthenticationServ
   };
 });
 
-app.controller("ProvidersController", function($scope, providers) {
+app.controller("providersController", function($scope, providers) {
   $scope.providers = providers.data;
 });
 
@@ -38,9 +38,22 @@ app.controller("servicetypesController",function($scope, servicetypes, servicety
         };
 });
 
-app.controller("servicesController",function($scope, services, servicesService) {
+app.controller("servicesController",function($scope, $location, services, servicesService, servicetypesService, providersService) {
 	$scope.services = services.data;
-
+  $scope.userservice = { stype: "", start: "", end: "", provider: "", cost: "", note: ""};
+  $scope.providerList = [];
+  $scope.testTypes = [];
+  servicetypesService.get().then(function(d) {
+    $scope.testTypes = d.data;
+  });
+  providersService.get().then(function(d) {
+    $scope.providerList = d.data;
+  })
+  $scope.addService = function() {
+      servicesService.addService($scope.userservice).success(function() {
+        $location.path('/services');
+      })
+  };
 });
 
 app.controller("HomeController", function($scope, $location, AuthenticationService) {
@@ -51,5 +64,9 @@ app.controller("HomeController", function($scope, $location, AuthenticationServi
     AuthenticationService.logout().success(function() {
       $location.path('/login');
     });
+  };
+
+  $scope.go = function ( path ) {
+  $location.path( path );
   };
 });

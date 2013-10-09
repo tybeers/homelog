@@ -16,5 +16,13 @@ class Provider extends Eloquent {
          */
         protected $hidden = array();
 
+        public function service()
+        {
+                return $this->hasMany('Service','provider_id');
+        }
 
+        public function rating()
+        {
+                return $this->belongsTo('Rating','rating_id');
+        }
 }

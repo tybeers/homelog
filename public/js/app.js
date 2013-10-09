@@ -39,10 +39,10 @@ app.config(function($routeProvider) {
 
   $routeProvider.when('/providers', {
     templateUrl: 'templates/providers.html',
-    controller: 'ProvidersController',
+    controller: 'providersController',
     resolve: {
-      providers : function(ProviderService) {
-        return ProviderService.get();
+      providers : function(providersService) {
+        return providerService.get();
       }
     }
   });
@@ -67,16 +67,25 @@ app.config(function($routeProvider) {
     }
   });
 
+   $routeProvider.when('/newservice', {
+    templateUrl: 'templates/addservice.html',
+    controller: 'servicesController',
+    resolve: {
+      services : function(servicesService) {
+        return servicesService.get();
+      }
+    }
+  });
 
-  $routeProvider.otherwise({ redirectTo: '/login' });
+  $routeProvider.otherwise({ redirectTo: '/home' });
 
 });
 
 app.run(function($rootScope, $location, AuthenticationService, FlashService) {
-  var routesThatRequireAuth = ['/home','/servicetypes'];
+  var routesThatDontRequireAuth = ['/login'];
 
   $rootScope.$on('$routeChangeStart', function(event, next, current) {
-    if(_(routesThatRequireAuth).contains($location.path()) && !AuthenticationService.isLoggedIn()) {
+    if(!(_(routesThatDontRequireAuth).contains($location.path())) && !AuthenticationService.isLoggedIn()) {
       $location.path('/login');
       FlashService.show("Please log in to continue.");
     }
