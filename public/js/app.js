@@ -42,7 +42,7 @@ app.config(function($routeProvider) {
     controller: 'providersController',
     resolve: {
       providers : function(providersService) {
-        return providerService.get();
+        return providersService.get();
       }
     }
   });

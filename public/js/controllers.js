@@ -41,6 +41,8 @@ app.controller("servicetypesController",function($scope, servicetypes, servicety
 app.controller("servicesController",function($scope, $location, services, servicesService, servicetypesService, providersService) {
 	$scope.services = services.data;
   $scope.userservice = { stype: "", start: "", end: "", provider: "", cost: "", note: ""};
+  $scope.myValue =true;
+  $scope.buttonText = "Add New";
   $scope.providerList = [];
   $scope.testTypes = [];
   servicetypesService.get().then(function(d) {
@@ -50,10 +52,22 @@ app.controller("servicesController",function($scope, $location, services, servic
     $scope.providerList = d.data;
   })
   $scope.addService = function() {
-      servicesService.addService($scope.userservice).success(function() {
-        $location.path('/services');
+      servicesService.addService($scope.userservice).then(function(d) {
+        $scope.hide();
+        $scope.services.push(d);
       })
   };
+
+  $scope.hide = function() {
+    $scope.myValue = !$scope.myValue;
+    if ($scope.myValue) {
+      $scope.buttonText = "Add New";
+      $scope.userservice = { stype: "", start: "", end: "", provider: "", cost: "", note: ""};
+    } else {
+      $scope.buttonText = "Cancel";
+    }
+
+  }
 });
 
 app.controller("HomeController", function($scope, $location, AuthenticationService) {

@@ -44,8 +44,11 @@ app.factory("servicesService", function($http,FlashService) {
                         return $http.get('/services');
                 },
                 addService: function(userservice) {
-                  var addService = $http.post("/services/add", userservice);
-                  return addService;
+                  var promise = $http.post("/services/add", userservice).then(function(d) {
+                      console.log(d);
+                      return d.data;
+                  });
+                  return promise;
                 }
 	};
 });

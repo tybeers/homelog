@@ -2,14 +2,15 @@
 <h2>History</h2>
 <div class="row">
     <div class="small-2 small-offset-10 columns">
-        <button ng-controller="HomeController" ng-click="go('/newservice')" class="button small expand radius">Add New</button>
+        <button ng-click="hide()" class="button small expand radius">{{ buttonText }}</button>
     </div>
 </div>
-<div class="row">
+
+<div ng-include=" 'templates/addservice.html' " ng-hide="myValue"></div>
+<div class="row" ng-show="myValue">
 <div class="large-12">
 
-<angular-table model="services" 
-    default-sort-column="end_date">
+<angular-table model="services" default-sort-column="end_date">
     <header-row>
         <header-column sortable="true" sort-field-name="start_date">
             <div style="display: inline-block;">Started</div>

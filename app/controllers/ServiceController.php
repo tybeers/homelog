@@ -40,7 +40,8 @@ class ServiceController extends BaseController {
     		$serv->end_date = Input::json('end');
     		$serv->cost = Input::json('cost');
     		$serv->save();
-    		return Response::json($serv);
+    		$newserv = Service::with('servicetype','provider')->find($serv->id);
+    		return Response::json($newserv);
     	} catch (Exception $e) {
     		return Response::json(array('flash'=>'Insert Failed'),500);
     	}
