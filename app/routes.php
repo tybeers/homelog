@@ -27,3 +27,6 @@ Route::any('/services','ServiceController@getServices');
 Route::post('/services/add','ServiceController@addService');
 
 Route::any('/providers','ProviderController@getProviders');
+Route::post('/providers/add','ProviderController@addProvider');
+
+Route::any('/ratings','ProviderController@getRatings');

@@ -8,6 +8,7 @@
 
 <div ng-include=" 'templates/addservice.html' " ng-hide="myValue"></div>
 <div class="row" ng-show="myValue">
+    <h3>Total: {{ total() | currency }}</h3>
 <div class="large-12">
 
 <angular-table model="services" default-sort-column="end_date">

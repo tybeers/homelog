@@ -7,6 +7,16 @@ app.factory("providersService", function($http) {
   return {
     get: function() {
       return $http.get('/providers');
+    },
+    getRatings: function() {
+      return $http.get('/ratings');
+    },
+    addProvider: function(userprovider) {
+      var promise = $http.post("/providers/add", userprovider).then(function(d) {
+          console.log(d);
+          return d.data;
+      })
+      return promise;
     }
   };
 });
@@ -22,7 +32,6 @@ app.factory("servicetypesService", function($http,FlashService) {
                 },
                 addType: function(usertypes) {
                         var promise = $http.post("/servicetypes/add", usertypes).then(function(d) {
-                                console.log(d);
                                 return d.data;
                         });
                         return promise;
@@ -45,7 +54,6 @@ app.factory("servicesService", function($http,FlashService) {
                 },
                 addService: function(userservice) {
                   var promise = $http.post("/services/add", userservice).then(function(d) {
-                      console.log(d);
                       return d.data;
                   });
                   return promise;

@@ -1,0 +1,50 @@
+<h2>New Provider</h2>
+<div class="row">
+    <form  ng-submit="addProvider()">
+      <fieldset class="radius">
+        <div class="row">
+          <div class="large-7 large-centered columns">
+            <div class="row">
+              <div class="large-5 large-7 columns">
+                <label>Name:</label>
+                <input type="text" name="name" placeholder="name" ng-model="userprovider.name" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-5 large-7 columns">
+                <label>Rating:</label>
+                <select ng-model="userprovider.rating" ng-options="item.id as item.name for item in ratings" > </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-5 large-7 columns">
+                <label>Notes:</label>
+                <textarea ng-model="userprovider.note"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-5 large-7 columns">
+                <label>Website:</label>
+                <input type="text" name="website" placeholder="website" ng-model="userprovider.website" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-5 large-7 columns">
+                <label>Email:</label>
+                <input type="text" name="email" placeholder="email" ng-model="userprovider.email" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-5 large-7 columns">
+                <label>Phone:</label>
+                <input type="text" name="phone" placeholder="phone" ng-model="userprovider.phone" />
+              </div>
+            </div>
+            <div class="small-3 columns">
+              <button type="submit" class="button large expand radius">Submit</button>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+</div>

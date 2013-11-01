@@ -1,11 +1,18 @@
 <div ng-include=" 'templates/menu.html' "></div>
 <h2>Providers</h2>
 
-<ul class="providers">
+<ul class="providers" ng-show="myValue">
   <li class="panel" ng-repeat="provider in providers">
     {{ provider.name }}: {{ provider.email }} - {{ provider.website }}
   </li>
 </ul>
+
+<div class="row">
+    <div class="small-2 small-offset-10 columns">
+        <button ng-click="hide()" class="button small expand radius">{{ buttonText }}</button>
+    </div>
+</div>
+<div ng-include=" 'templates/addprovider.html' " ng-hide="myValue"></div>
 
 <div class="large-6 large-offset-3">
   <div ng-include=" 'templates/footer.html' "></div>

@@ -14,8 +14,33 @@ app.controller("LoginController", function($scope, $location, AuthenticationServ
   };
 });
 
-app.controller("providersController", function($scope, providers) {
+app.controller("providersController", function($scope, $location, providers, providersService) {
   $scope.providers = providers.data;
+  $scope.userprovider = { name: "", rating: "", email: "", phone: "", website: "", notes: "" };
+  $scope.ratings = [];
+  $scope.buttonText = "Add New";
+  $scope.myValue =true;
+
+  providersService.getRatings().then(function(d) {
+    $scope.ratings = d.data;
+  })
+  $scope.addProvider = function() {
+      providersService.addProvider($scope.userprovider).then(function(d) {
+        $scope.providers.push(d);
+        $scope.userprovider = { name: "", rating: "", email: "", phone: "", website: "", notes: "" };
+        $scope.hide();
+      })
+  }
+
+  $scope.hide = function() {
+    $scope.myValue = !$scope.myValue;
+    if ($scope.myValue) {
+      $scope.buttonText = "Add New";
+      $scope.userprovider = { name: "", rating: "", email: "", phone: "", website: "", notes: "" };
+    } else {
+      $scope.buttonText = "Cancel";
+    }
+  }
 });
 
 app.controller("servicetypesController",function($scope, servicetypes, servicetypesService) {
@@ -40,6 +65,13 @@ app.controller("servicetypesController",function($scope, servicetypes, servicety
 
 app.controller("servicesController",function($scope, $location, services, servicesService, servicetypesService, providersService) {
 	$scope.services = services.data;
+  $scope.total = function() {
+    var total = 0.00;
+    angular.forEach($scope.services, function(services) {
+      total += services.cost * 1;
+    });
+    return total;
+  };
   $scope.userservice = { stype: "", start: "", end: "", provider: "", cost: "", note: ""};
   $scope.myValue =true;
   $scope.buttonText = "Add New";
