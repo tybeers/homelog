@@ -3,7 +3,6 @@
 var app = angular.module('directives', []).
   value('version', '0.1');
 
-
 app.directive("showsMessageWhenHovered", function() {
   return {
     restrict: "A", // A = Attribute, C = CSS Class, E = HTML Element, M = HTML Comment

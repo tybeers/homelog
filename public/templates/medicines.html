@@ -1,0 +1,56 @@
+<h2>Medicines</h2>
+<div class="large-12">
+  <div class="row">
+    <div class="small-5 small-5 columns">
+    <input type="text" ng-model="search" class="search-query" placeholder="Search">
+    </div>
+    <div class="small-1 small-offset-4 columns">
+            <button ng-click="hide()" class="button small expand radius"><strong>{{ buttonText }}</strong></button>
+    </div>
+  </div>
+  <div class="row">
+    <table>
+      <thead>
+        <tr>
+          <th class="small-2 small-2">Brand</th>
+          <th class="small-2 small-2">Medicine</th>
+          <th class="small-3 small-3">Dosage</th>
+          <th class="small-2 small-2">Prescribed</th>
+          <th class="small-2 small-2">Expires</th>
+          <th class="small-3 small-3">Action</th>
+        <tr>
+      </thead>
+      <tbody>
+        <tr  ng-hide="myValue"><form  ng-submit="addMedicine()">
+          <td><input type="text" name="brand" placeholder="Brand" ng-model="usermedicine.brand" /></td>
+          <td><input type="text" name="name" placeholder="Name" ng-model="usermedicine.name" /></td>
+          <td>
+            <input type="float" name="dosage" placeholder="Dose" ng-model="usermedicine.dosage" />
+            <input type="text" name="units" placeholder="Units" ng-model="usermedicine.units" />
+            <input type="text" name="frequency" placeholder="Frequency" ng-model="usermedicine.frequency" />
+          </td>
+          <td><input type="date" name="start" placeholder="Presrcibed" ng-model="usermedicine.start" /></td>
+          <td><input type="date" name="end" placeholder="Expires" ng-model="usermedicine.end" /></td>
+          <td><button type="submit" class="button small expand radius">Submit</button></td>
+        </tr>
+        <tr ng-repeat="medicine in medicines | filter:search | orderBy: 'name'">
+          <form ng-show="editing">
+          <td ng-show="editing"><input type="text" ng-model="medicine.brand" placeholder="Brand" ng-required/></td>
+          <td ng-hide="editing">{{ medicine.brand }}</td>
+          <td ng-show="editing"><input type="text" ng-model="medicine.name" placeholder="Name" ng-required/></td>
+          <td ng-hide="editing">{{ medicine.name}}</td>
+          <td>{{ medicine.dosage }} {{ medicine.units }} {{ medicine.frequency }}</td>
+          <td ng-show="editing"><input type="date" ng-model="medicine.start_date" placeholder="Prescribed" ng-required/></td>
+          <td ng-hide="editing">{{ medicine.start_date }}</td>
+          <td ng-show="editing"><input type="date" ng-model="medicine.end_date" placeholder="Expire" ng-required/></td>
+          <td ng-hide="editing">{{ medicine.end_date }}</td>
+          <td><button ng-show="editing" ng-click="editMedicine($index); editing=false">Save</button><button ng-click = "editing=true" ng-hide="editing">Edit</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="large-6 large-offset-3">
+  <div ng-include=" 'templates/footer.html' "></div>
+</div>

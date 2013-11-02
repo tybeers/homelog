@@ -14,6 +14,12 @@ app.controller("LoginController", function($scope, $location, AuthenticationServ
   };
 });
 
+
+/* -------------------------- */
+/*    --- HOME MAINT  ---     */
+/* -------------------------- */
+
+
 app.controller("providersController", function($scope, $location, providers, providersService) {
   $scope.providers = providers.data;
   $scope.userprovider = { name: "", rating: "", email: "", phone: "", website: "", notes: "" };
@@ -114,5 +120,42 @@ app.controller("HomeController", function($scope, $location, AuthenticationServi
 
   $scope.go = function ( path ) {
   $location.path( path );
+  };
+});
+
+/* -------------------------- */
+/*    --- FAM  MAINT  ---     */
+/* -------------------------- */
+
+app.controller("medicinesController", function($scope, $location, medicines, medicinesService) {
+  $scope.medicines = medicines.data;
+  $scope.editing = false;
+  $scope.myValue = true;
+  $scope.buttonText = "+";
+  $scope.usermedicine = { name: "", brand: "", dosage: "", units: "", frequency: "", notes: "", start: "", end: "" };
+
+  $scope.addMedicine = function() {
+      medicinesService.addMedicine($scope.usermedicine).then(function(d) {
+        $scope.medicines.push(d);
+        $scope.hide();
+        $scope.usermedicine = { name: "", brand: "", dosage: "", units: "", frequency: "", notes: "", start: "", end: "" };
+      })
+  };
+  $scope.editMedicine = function ( idx ) {
+        var med_to_edit = $scope.medicines[idx];
+
+        medicinesService.editMedicine(med_to_edit).then(function (d) {
+          $scope.medicines.push();
+        });
+  };
+  $scope.hide = function() {
+    $scope.myValue = !$scope.myValue;
+    if ($scope.myValue) {
+      $scope.buttonText = "+";
+      $scope.usermedicine = { name: "", brand: "", dosage: "", units: "", frequency: "", notes: "", start: "", end: "" };
+    } else {
+      $scope.buttonText = "-";
+    }
+
   };
 });

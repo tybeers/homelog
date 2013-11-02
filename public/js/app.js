@@ -67,12 +67,12 @@ app.config(function($routeProvider) {
     }
   });
 
-   $routeProvider.when('/newservice', {
-    templateUrl: 'templates/addservice.html',
-    controller: 'servicesController',
+  $routeProvider.when('/medicines', {
+    templateUrl: 'templates/medicines.html',
+    controller: 'medicinesController',
     resolve: {
-      services : function(servicesService) {
-        return servicesService.get();
+      medicines : function(medicinesService) {
+        return medicinesService.get();
       }
     }
   });

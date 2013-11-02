@@ -3,6 +3,10 @@
 var app = angular.module('services', []).
   value('version', '0.1');
 
+/* -------------------------- */
+/*    --- HOME MAINT  ---     */
+/* -------------------------- */
+
 app.factory("providersService", function($http) {
   return {
     get: function() {
@@ -59,6 +63,56 @@ app.factory("servicesService", function($http,FlashService) {
                   return promise;
                 }
 	};
+});
+
+
+/* -------------------------- */
+/*     --- FAM MAINT  ---     */
+/* -------------------------- */
+
+
+app.factory("medicinesService", function($http,FlashService) {
+  return {
+                get: function() {
+                        return $http.get('/medicines');
+                },
+                addMedicine: function(usermedicine) {
+                  var promise = $http.post("/medicines/add", usermedicine).then(function(d) {
+                      return d.data;
+                  });
+                  return promise;
+                },
+                editMedicine: function(medicine) {
+                  var promise = $http.post("/medicines/edit", medicine).then(function(d) {
+                      return d.data;
+                  });
+                  return promise;
+                }
+  };
+});
+
+
+/* -------------------------- */
+/*   --- APP  SERVICES  ---   */
+/* -------------------------- */
+
+
+app.factory("providersService", function($http) {
+  return {
+    get: function() {
+      return $http.get('/providers');
+    },
+    getRatings: function() {
+      return $http.get('/ratings');
+    },
+    addProvider: function(userprovider) {
+      var promise = $http.post("/providers/add", userprovider).then(function(d) {
+          console.log(d);
+          return d.data;
+      })
+      return promise;
+    }
+  };
 });
 
 app.factory("FlashService", function($rootScope) {
