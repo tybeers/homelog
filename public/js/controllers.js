@@ -20,7 +20,7 @@ app.controller("LoginController", function($scope, $location, AuthenticationServ
 /* -------------------------- */
 
 
-app.controller("providersController", function($scope, $location, providers, providersService) {
+app.controller("providersController", function($scope, $location, $http, providers, providersService) {
   $scope.providers = providers.data;
   $scope.userprovider = { name: "", rating: "", email: "", phone: "", website: "", notes: "" };
   $scope.ratings = [];
@@ -30,14 +30,23 @@ app.controller("providersController", function($scope, $location, providers, pro
   providersService.getRatings().then(function(d) {
     $scope.ratings = d.data;
   })
+  $scope.editProvider = function ( idx ) {
+        var prov_to_edit = $scope.providers[idx];
+        var tempprovider = { name: prov_to_edit.name, rating: prov_to_edit.rating_id, email: prov_to_edit.email, phone: prov_to_edit.phone, website: prov_to_edit.website, notes: ""};
+        console.log(tempprovider);
+        //providersService.editProvider(tempprovider).then(function(d) {
+          //this is bad, but it wont run from the service, need to fix
+        $http.post("/providers/edit", prov_to_edit).then(function(d) {
+          $scope.providers.push();
+        });
+  };
   $scope.addProvider = function() {
       providersService.addProvider($scope.userprovider).then(function(d) {
         $scope.providers.push(d);
         $scope.userprovider = { name: "", rating: "", email: "", phone: "", website: "", notes: "" };
         $scope.hide();
       })
-  }
-
+  };
   $scope.hide = function() {
     $scope.myValue = !$scope.myValue;
     if ($scope.myValue) {
@@ -59,7 +68,12 @@ app.controller("servicetypesController",function($scope, servicetypes, servicety
                          $scope.usertypes = { name: "", created_at: "" };
                 });
         };
-
+        $scope.editServiceType = function ( idx ) {
+              var stype_to_edit = $scope.servicetypes[idx];
+              servicetypesService.editType(stype_to_edit).then(function (d) {
+                $scope.servicetypes.push();
+              });
+        };
         $scope.delete = function ( idx ) {
                 var stype_to_delete = $scope.servicetypes[idx];
 
@@ -129,7 +143,6 @@ app.controller("HomeController", function($scope, $location, AuthenticationServi
 
 app.controller("medicinesController", function($scope, $location, medicines, medicinesService) {
   $scope.medicines = medicines.data;
-  $scope.editing = false;
   $scope.myValue = true;
   $scope.buttonText = "+";
   $scope.usermedicine = { name: "", brand: "", dosage: "", units: "", frequency: "", notes: "", start: "", end: "" };
@@ -143,7 +156,7 @@ app.controller("medicinesController", function($scope, $location, medicines, med
   };
   $scope.editMedicine = function ( idx ) {
         var med_to_edit = $scope.medicines[idx];
-
+        console.log(med_to_edit);
         medicinesService.editMedicine(med_to_edit).then(function (d) {
           $scope.medicines.push();
         });

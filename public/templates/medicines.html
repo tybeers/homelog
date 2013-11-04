@@ -1,3 +1,4 @@
+<div ng-include=" 'templates/menubar.html' "></div>
 <h2>Medicines</h2>
 <div class="large-12">
   <div class="row">
@@ -5,18 +6,18 @@
     <input type="text" ng-model="search" class="search-query" placeholder="Search">
     </div>
     <div class="small-1 small-offset-4 columns">
-            <button ng-click="hide()" class="button small expand radius"><strong>{{ buttonText }}</strong></button>
+            <button ng-click="hide()" class="button round"><strong>{{ buttonText }}</strong></button>
     </div>
   </div>
   <div class="row">
     <table>
       <thead>
         <tr>
-          <th class="small-2 small-2">Brand</th>
-          <th class="small-2 small-2">Medicine</th>
+          <th class="small-2 small-2" ng-click="reverse = predicate == 'brand' && !reverse; predicate = 'brand'">Brand</th>
+          <th class="small-2 small-2" ng-click="reverse = predicate == 'name' && !reverse; predicate = 'name'">Medicine</th>
           <th class="small-3 small-3">Dosage</th>
-          <th class="small-2 small-2">Prescribed</th>
-          <th class="small-2 small-2">Expires</th>
+          <th class="small-2 small-2" ng-click="reverse = predicate == 'start_date' && !reverse; predicate = 'start_date'">Prescribed</th>
+          <th class="small-2 small-2" ng-click="reverse = predicate == 'end_date' && !reverse; predicate = 'end_date'">Expires</th>
           <th class="small-3 small-3">Action</th>
         <tr>
       </thead>
@@ -31,9 +32,9 @@
           </td>
           <td><input type="date" name="start" placeholder="Presrcibed" ng-model="usermedicine.start" /></td>
           <td><input type="date" name="end" placeholder="Expires" ng-model="usermedicine.end" /></td>
-          <td><button type="submit" class="button small expand radius">Submit</button></td>
+          <td><button type="submit" class="button small expand radius">Submit</button></td></form>
         </tr>
-        <tr ng-repeat="medicine in medicines | filter:search | orderBy: 'name'">
+        <tr ng-repeat="medicine in medicines | filter:search | orderBy:predicate:reverse">
           <form ng-show="editing">
           <td ng-show="editing"><input type="text" ng-model="medicine.brand" placeholder="Brand" ng-required/></td>
           <td ng-hide="editing">{{ medicine.brand }}</td>
@@ -44,7 +45,7 @@
           <td ng-hide="editing">{{ medicine.start_date }}</td>
           <td ng-show="editing"><input type="date" ng-model="medicine.end_date" placeholder="Expire" ng-required/></td>
           <td ng-hide="editing">{{ medicine.end_date }}</td>
-          <td><button ng-show="editing" ng-click="editMedicine($index); editing=false">Save</button><button ng-click = "editing=true" ng-hide="editing">Edit</button></td>
+          <td><img src="img/Save.png" ng-show="editing" ng-click="editMedicine($index); editing=false" /><img src="img/Edit.png" ng-click = "editing=true" ng-hide="editing" /></td> </form>
         </tr>
       </tbody>
     </table>

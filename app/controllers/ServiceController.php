@@ -16,6 +16,16 @@ class ServiceController extends BaseController {
 			return Response::json(array('flash'=>'Insert Failed'),500);
 		}
 	}
+
+	public function editServiceType() {
+		try {
+				return Response::json(DB::table('servicetypes')->where('id',Input::json('id'))
+									  ->update(array('name' => Input::json('name'))));
+		} catch (Exception $e) {
+			return Response::json(array('flash'=>'Update Failed'),500);	
+		}
+	}
+
 	public function delServiceType() {
 		try {
 			$stype = DB::table('servicetypes')->where('id','=',Input::json('id'))->delete();

@@ -1,34 +1,37 @@
-<div ng-include=" 'templates/menu.html' "></div>
+<div ng-include=" 'templates/menubar.html' "></div>
 <h2>Service Types</h2>
 <div class="row">
 <div class="large-12">
-<ul class="servicetypes">
-  <li class="panel" ng-repeat="servicetype in servicetypes">
-    <div class="small-6 small-6 columns">
-	{{ servicetype.name }} created {{ servicetype.created_at }}
+<form ng-submit="addServiceType()">
+  <fieldset class="radius">
+    <div class="row">
+      <div class="small-4 small-4 columns">
+        <input type="text" name="name" placeholder="name" ng-model="usertypes.name" required/>
+      </div>
+      <div class="small-8 small-8 columns">
+        <button type="submit" class="button small radius">Submit</button>
+      </div>
     </div>
-    <div class="small-2 small-2 columns">	
-	<a class="delButton" ng-click="delete($index)">Delete</a>
-    </div>
-  </li>
-</div>
-</ul>
-</div>
-    <form ng-submit="addServiceType()">
-      <fieldset class="radius">
-        <div class="row">
-          <div class="small-3 columns">
-            <input type="text" name="name" placeholder="name" ng-model="usertypes.name" required/>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="small-3 columns">
-            <button type="submit" class="button large expand radius">Submit</button>
-          </div>
-        </div>
-      </fieldset>
-    </form>
+  </fieldset>
+</form>
+<table>
+  <thead>
+    <tr>
+      <th ng-click="reverse = predicate == 'name' && !reverse; predicate = 'name'">Service Type</th>
+      <th ng-click="reverse = predicate == 'created_at' && !reverse; predicate = 'created_at'">Created</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="servicetype in servicetypes | orderBy:predicate:reverse">
+      <form ng-show="editing">
+        <td ng-show="editing"><input type="text" ng-model="servicetype.name" placeholder="name" ng-required/></td>
+      <td ng-hide="editing">{{ servicetype.name }}</td>
+      <td>{{ servicetype.created_at }}</td>
+      <td><img src="img/Save.png" ng-show="editing" ng-click="editServiceType($index); editing=false" /><img src="img/Edit.png" ng-click = "editing=true" ng-hide="editing" /><img src="img/Delete.png" ng-click="delete($index)" /></td></form>
+    </tr>
+  </tbody>
+</table>
 <div class="large-6 large-offset-3">
   <div ng-include=" 'templates/footer.html' "></div>
 </div>

@@ -12,4 +12,9 @@ button {
 
 table {
   width: 100%;
+  background: #F5EDE3;
+}
+
+body {
+	background: #FFFFF2;
 }

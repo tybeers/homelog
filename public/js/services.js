@@ -15,13 +15,20 @@ app.factory("providersService", function($http) {
     getRatings: function() {
       return $http.get('/ratings');
     },
+    editProvider: function(provider) {
+      console.log("in the service");
+      var promise = $http.post("/providers/edit", provider).then(function(d) {
+          return d.data;
+      });
+      return promise;
+    },
     addProvider: function(userprovider) {
       var promise = $http.post("/providers/add", userprovider).then(function(d) {
           console.log(d);
           return d.data;
       })
       return promise;
-    }
+    },
   };
 });
 
@@ -37,6 +44,12 @@ app.factory("servicetypesService", function($http,FlashService) {
                 addType: function(usertypes) {
                         var promise = $http.post("/servicetypes/add", usertypes).then(function(d) {
                                 return d.data;
+                        });
+                        return promise;
+                },
+                editType: function(stype) {
+                        var promise = $http.post("/servicetypes/edit", stype).then(function(d) {
+                            return d.data;
                         });
                         return promise;
                 },

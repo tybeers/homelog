@@ -3,7 +3,7 @@
 class ProviderController extends BaseController {
 
 	public function getProviders() {
-		return Response::json(DB::table('providers')->get());
+		return Response::json(Provider::with('rating')->get());
 	}
 
 	public function getRatings() {
@@ -23,6 +23,20 @@ class ProviderController extends BaseController {
 			return Response::json($prov);
 		} catch (Exception $e) {
 			return Response::json(array('flash'=>'Insert Failed'),500);
+		}
+	}
+
+	public function editProvider() {
+		try {
+				return Response::json(DB::table('providers')->where('id',Input::json('id'))
+									  ->update(array('name' => Input::json('name')
+									  				,'email' => Input::json('email')
+									  				,'website' => Input::json('website')
+									  				,'phone' => Input::json('phone')
+									  				,'rating_id' => Input::json('rating_id')
+									  	)));
+		} catch (Exception $e) {
+			return Response::json(array('flash'=>'Update Failed'),500);	
 		}
 	}
 }

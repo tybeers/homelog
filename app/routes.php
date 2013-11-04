@@ -21,6 +21,7 @@ Route::get('/auth/logout', 'AuthController@logout');
 
 Route::any('/servicetypes','ServiceController@getServiceTypes');
 Route::post('/servicetypes/add','ServiceController@addServiceType');
+Route::post('/servicetypes/edit','ServiceController@editServiceType');
 Route::post('/servicetypes/delete','ServiceController@delServiceType');
 
 Route::any('/services','ServiceController@getServices');
@@ -28,6 +29,7 @@ Route::post('/services/add','ServiceController@addService');
 
 Route::any('/providers','ProviderController@getProviders');
 Route::post('/providers/add','ProviderController@addProvider');
+Route::post('/providers/edit','ProviderController@editProvider');
 
 Route::any('/ratings','ProviderController@getRatings');
 

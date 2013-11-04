@@ -1,18 +1,39 @@
-<div ng-include=" 'templates/menu.html' "></div>
+<div ng-include=" 'templates/menubar.html' "></div>
 <h2>Providers</h2>
-
-<ul class="providers" ng-show="myValue">
-  <li class="panel" ng-repeat="provider in providers">
-    {{ provider.name }}: {{ provider.email }} - {{ provider.website }}
-  </li>
-</ul>
-
 <div class="row">
     <div class="small-2 small-offset-10 columns">
         <button ng-click="hide()" class="button small expand radius">{{ buttonText }}</button>
     </div>
 </div>
 <div ng-include=" 'templates/addprovider.html' " ng-hide="myValue"></div>
+<table ng-show="myValue">
+  <thead>
+  	<tr>
+  		<th ng-click="reverse = predicate == 'name' && !reverse; predicate = 'name'">Provider</th>
+  		<th>Email</th>
+  		<th>Web</th>
+  		<th>Phone</th>
+  		<th ng-click="reverse = predicate == 'rating.name' && !reverse; predicate = 'rating.name'">Rating</th>
+  		<th>Actions</th>
+  	</tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="provider in providers | orderBy:predicate:reverse">
+    	<form ng-show="editing">
+        <td ng-show="editing"><input type="text" ng-model="provider.name" placeholder="name" ng-required/></td>
+    	<td ng-hide="editing">{{ provider.name }}</td>
+    	<td ng-show="editing"><input type="text" ng-model="provider.email" placeholder="email" ng-required/></td>
+    	<td ng-hide="editing">{{ provider.email }}</td>
+    	<td ng-show="editing"><input type="text" ng-model="provider.website" placeholder="URL" ng-required/></td>
+    	<td ng-hide="editing">{{ provider.website }}</td>
+    	<td ng-show="editing"><input type="text" ng-model="provider.phone" placeholder="phone" ng-required/></td>
+    	<td ng-hide="editing">{{ provider.phone }}</td>
+    	<td ng-show="editing"><select ng-model="provider.rating_id" ng-options="item.id as item.name for item in ratings" ></select>
+    	<td ng-hide="editing">{{ provider.rating.name }}</td>
+    	<td><img src="img/Save.png" ng-show="editing" ng-click="editProvider($index); editing=false" /><img src="img/Edit.png" ng-click = "editing=true" ng-hide="editing" /></td></form>
+    </tr>
+  </tbody>
+</table>
 
 <div class="large-6 large-offset-3">
   <div ng-include=" 'templates/footer.html' "></div>
