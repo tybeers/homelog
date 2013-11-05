@@ -78,6 +78,23 @@ app.factory("servicesService", function($http,FlashService) {
 	};
 });
 
+app.factory("providersService", function($http) {
+  return {
+    get: function() {
+      return $http.get('/providers');
+    },
+    getRatings: function() {
+      return $http.get('/ratings');
+    },
+    addProvider: function(userprovider) {
+      var promise = $http.post("/providers/add", userprovider).then(function(d) {
+          console.log(d);
+          return d.data;
+      })
+      return promise;
+    }
+  };
+});
 
 /* -------------------------- */
 /*     --- FAM MAINT  ---     */
@@ -109,24 +126,6 @@ app.factory("medicinesService", function($http,FlashService) {
 /*   --- APP  SERVICES  ---   */
 /* -------------------------- */
 
-
-app.factory("providersService", function($http) {
-  return {
-    get: function() {
-      return $http.get('/providers');
-    },
-    getRatings: function() {
-      return $http.get('/ratings');
-    },
-    addProvider: function(userprovider) {
-      var promise = $http.post("/providers/add", userprovider).then(function(d) {
-          console.log(d);
-          return d.data;
-      })
-      return promise;
-    }
-  };
-});
 
 app.factory("FlashService", function($rootScope) {
   return {

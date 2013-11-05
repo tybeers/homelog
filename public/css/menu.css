@@ -42,6 +42,36 @@
 	position:relative;
 	top:1px;
 }
+.inline-list {
+  position: relative;
+  overflow: visible;
+  float: left;
+  left: 50%;
+}
+
+.inline-list > li {
+  position: relative;
+  right: 50%;
+}
+#menucontainer {
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(top left, #FFFFA8 0%, #C2DEFF 100%);
+
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(top left, #FFFFA8 0%, #C2DEFF 100%);
+
+	/* Opera */ 
+	background-image: -o-linear-gradient(top left, #FFFFA8 0%, #C2DEFF 100%);
+
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FFFFA8), color-stop(1, #C2DEFF));
+
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(top left, #FFFFA8 0%, #C2DEFF 100%);
+
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to bottom right, #FFFFA8 0%, #C2DEFF 100%);
+}
 .delButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;

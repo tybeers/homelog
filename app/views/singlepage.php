@@ -23,7 +23,6 @@
 <body>
   <div class="row">
     <div class="large-12">
-      <h3>Something Here</h3>
       <div class="row">
         <div class="large-6 large-offset-3">
           <div id="flash" class="alert-box alert" ng-show="flash">
