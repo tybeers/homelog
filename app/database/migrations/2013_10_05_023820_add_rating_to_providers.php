@@ -19,7 +19,7 @@ class AddRatingToProviders extends Migration {
                 });
 
 		Schema::table('providers', function($table) {
-			$table->unsignedInteger('rating_id');
+			$table->unsignedInteger('rating_id')->nullable();
 			$table->text('notes');
 			$table->foreign('rating_id')->references('id')->on('ratings');
 		});
