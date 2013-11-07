@@ -1,0 +1,32 @@
+<div ng-include=" 'templates/menubar.html' "></div>
+<h3>Journal</h3>
+<div class="row">
+	<form>
+	<div class="large-12 columns">
+		<div class="large-6 columns">
+			<label>Start:</label><input type="date" name="Start" placeholder="start" ng-model="start_date" />
+		</div>
+		<div class="large-6 columns">
+			<label>End:</label><input type="date" name="Start" placeholder="End" ng-model="end_date" />
+		</div>
+	</div>
+	</form>
+</div>
+<ul class="large-block-grid-4">
+	<li ng-repeat="day in days">
+		<div class="usercal">
+			<h3>{{ day.when }}</h3>
+			<ul>
+				<li ng-repeat="cat in day.eatings" ng-click="foodShow = !foodShow">{{ cat.name }}
+					<ul ng-show="foodShow">
+						<li ng-repeat="food in cat.foods">{{ food.name }}</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</li>
+</ul>
+
+<div class="large-6 large-offset-3">
+  <div ng-include=" 'templates/footer.html' "></div>
+</div>

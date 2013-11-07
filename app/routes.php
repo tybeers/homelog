@@ -36,3 +36,5 @@ Route::any('/ratings','ProviderController@getRatings');
 Route::any('/medicines','MedicineController@getMedicines');
 Route::post('/medicines/add','MedicineController@addMedicine');
 Route::post('/medicines/edit','MedicineController@editMedicine');
+
+Route::post('/journal/get','DayController@getDays');

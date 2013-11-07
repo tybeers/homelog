@@ -37,6 +37,11 @@ app.config(function($routeProvider) {
     controller: 'HomeController'
   });
 
+  $routeProvider.when('/journal', {
+    templateUrl: 'templates/journal.html',
+    controller: 'journalController'
+  });
+
   $routeProvider.when('/providers', {
     templateUrl: 'templates/providers.html',
     controller: 'providersController',

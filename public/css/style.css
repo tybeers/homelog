@@ -18,3 +18,14 @@ table {
 body {
 	background: #FFFFF2;
 }
+
+.usercal {
+	background: #F5EDE3;
+	border:2px solid;
+	height: 350px;
+	width: 250px;
+}
+
+.usercal h3 {
+	background: #f6b33d;
+}

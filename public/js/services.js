@@ -121,6 +121,31 @@ app.factory("medicinesService", function($http,FlashService) {
   };
 });
 
+app.factory("journalService", function($http,FlashService) {
+  return {
+                getDays: function(started,ended) {
+                  if (started > ended) { 
+                      FlashService.show('Start date must be less than End date'); 
+                  } else { 
+                      FlashService.show('');
+                      FlashService.clear;
+                      var passthrough = {'start': started, 'end': ended};
+                      var promise = $http.post("/journal/get", passthrough).then(function(d) {
+                          console.log(d.data);
+                          return d.data;
+                      });
+                      return promise;
+                  }
+                },
+                getDay: function(day) {
+                  var promise = $http.post("/journal/day", day).then(function(d) {
+                          console.log(d.data);
+                          return d.data;
+                      });
+                      return promise;
+                }
+          }
+});
 
 /* -------------------------- */
 /*   --- APP  SERVICES  ---   */

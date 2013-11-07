@@ -85,6 +85,7 @@ app.controller("servicetypesController",function($scope, servicetypes, servicety
 
 app.controller("servicesController",function($scope, $location, services, servicesService, servicetypesService, providersService) {
 	$scope.services = services.data;
+  console.log($scope.services);
   $scope.total = function() {
     var total = 0.00;
     angular.forEach($scope.services, function(services) {
@@ -171,4 +172,16 @@ app.controller("medicinesController", function($scope, $location, medicines, med
     }
 
   };
+});
+
+app.controller("journalController", function($scope, $location, journalService) {
+  $scope.start_date = '2013-11-01';
+  $scope.end_date = '2013-11-07';
+  $scope.$watch('start_date + end_date', function() { $scope.days = journalService.getDays($scope.start_date,$scope.end_date); })
+
+  $scope.dayFood = function (day) {
+    var day_to_get = $scope.days[day];
+    journalService.getDay(day_to_get);
+  };
+
 });
