@@ -17,7 +17,7 @@
 		<div class="usercal">
 			<h3>{{ day.when }}</h3>
 			<ul>
-				<li ng-repeat="cat in day.eatings" ng-click="foodShow = !foodShow">{{ cat.name }}
+				<li ng-repeat="cat in day.eatings" ng-click="foodShow = !foodShow"><span class="foodCategory" >{{ cat.name }}</span>
 					<ul ng-show="foodShow">
 						<li ng-repeat="food in cat.foods">{{ food.name }}</li>
 					</ul>
