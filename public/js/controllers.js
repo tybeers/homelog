@@ -175,16 +175,23 @@ app.controller("medicinesController", function($scope, $location, medicines, med
 });
 
 app.controller("journalController", function($scope, $location, journalService, foods) {
-  $scope.start_date = '2013-11-04';
-  $scope.end_date = '2013-11-07';
+  $scope.range = { start_date: '2013-11-03', end_date: '2013-11-07'};
   $scope.available = foods.data;
-  console.log($scope.available);
-  $scope.$watch('start_date + end_date', function() { $scope.days = journalService.getDays($scope.start_date,$scope.end_date); })
   
+  $scope.$watchCollection('range', function() { 
+      $scope.refreshDays();
+  })
+
   $scope.onDrop = function($event,$data,array){
       var dropFood = { day_id: array['id'], food_id: $data['id']};
       journalService.addEating(dropFood).then(function (d) {
-        $scope.days =  journalService.getDays($scope.start_date,$scope.end_date);
+        $scope.refreshDays();
       })
     };
+
+    $scope.refreshDays = function() {
+      journalService.getDays($scope.range).then(function (d) {
+          $scope.days = d;
+        });
+    }
 });

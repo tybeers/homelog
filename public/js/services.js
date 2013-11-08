@@ -123,18 +123,17 @@ app.factory("medicinesService", function($http,FlashService) {
 
 app.factory("journalService", function($http,FlashService) {
   return {
-                getDays: function(started,ended) {
-                  if (started > ended) { 
+                getDays: function(range) {
+                  if (range.start_date > range.end_date) { 
                       FlashService.show('Start date must be less than End date'); 
-                  } else { 
+                  } else {
                       FlashService.show('');
                       FlashService.clear;
-                      var passthrough = {'start': started, 'end': ended};
-                      var promise = $http.post("/journal/get", passthrough).then(function(d) {
-                          return d.data;
-                      });
-                      return promise;
                   }
+                  var promise = $http.post("/journal/get", range).then(function(d) {
+                      return d.data;
+                  });
+                  return promise;
                 },
                 getAvailableFoods: function() {
                    return $http.get('/journal/available');

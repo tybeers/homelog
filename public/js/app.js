@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngSanitize','services','controllers','directives','angular-table','ngDragDrop']);
+var app = angular.module("app", ['ngRoute','ngSanitize','services','controllers','directives','angular-table','ngDragDrop','dateFilter']);
 
 app.config(function($httpProvider) {
 

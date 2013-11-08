@@ -29,8 +29,8 @@ class DayController extends BaseController {
 		$count = 0;
 		$count2 = 0;
 		$dates = DB::table('days')
-				->where('when','>=',Input::json('start'))
-				->where('when','<=',Input::json('end'))
+				->where('when','>=',Input::json('start_date'))
+				->where('when','<=',Input::json('end_date'))
 				->get();
 		$categories = DB::table('categories')->get();
 		foreach ($dates as $value) {
