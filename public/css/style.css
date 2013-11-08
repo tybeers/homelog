@@ -22,7 +22,7 @@ body {
 .usercal {
 	background: #F5EDE3;
 	border:2px solid;
-	height: 350px;
+	height: 300px;
 	width: 250px;
 	overflow: auto;
 }
@@ -34,6 +34,13 @@ body {
 .usercal ul
 {
     list-style-type: none;
+}
+
+.sidebar {
+	height: 300px;
+	width: 250px;
+	border:2px solid;
+	overflow: auto;
 }
 
 .foodCategory {
@@ -60,4 +67,36 @@ body {
 }.foodCategory:active {
 	position:relative;
 	top:1px;
+}
+.availCategory {
+	-moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	background-color:#79bbff;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #84bbf3;
+	display:inline-block;
+	color:#ffffff;
+	font-family:arial;
+	font-size:14px;
+	font-weight:bold;
+	padding:3px 3px;
+	width: 100px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #528ecc;
+	text-align: center;
+}.availCategory:hover {
+	background-color:#378de5;
+}.availCategory:active {
+	position:relative;
+	top:1px;
+}
+
+.availList{
+    list-style-type: none;
+}
+
+.avaiList li {
 }

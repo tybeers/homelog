@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngSanitize','services','controllers','directives','angular-table']);
+var app = angular.module("app", ['ngSanitize','services','controllers','directives','angular-table','ngDragDrop']);
 
 app.config(function($httpProvider) {
 
@@ -39,7 +39,12 @@ app.config(function($routeProvider) {
 
   $routeProvider.when('/journal', {
     templateUrl: 'templates/journal.html',
-    controller: 'journalController'
+    controller: 'journalController',
+    resolve: {
+      foods : function(journalService) {
+        return journalService.getAvailableFoods();
+      }
+    }
   });
 
   $routeProvider.when('/providers', {

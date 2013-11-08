@@ -131,18 +131,19 @@ app.factory("journalService", function($http,FlashService) {
                       FlashService.clear;
                       var passthrough = {'start': started, 'end': ended};
                       var promise = $http.post("/journal/get", passthrough).then(function(d) {
-                          console.log(d.data);
                           return d.data;
                       });
                       return promise;
                   }
                 },
-                getDay: function(day) {
-                  var promise = $http.post("/journal/day", day).then(function(d) {
-                          console.log(d.data);
-                          return d.data;
-                      });
-                      return promise;
+                getAvailableFoods: function() {
+                   return $http.get('/journal/available');
+                },
+                addEating: function(added) {
+                  var promise = $http.post("/journal/addEating",added).then(function(d) {
+                    return d.data;
+                  });
+                  return promise;
                 }
           }
 });

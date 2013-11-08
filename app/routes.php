@@ -38,3 +38,5 @@ Route::post('/medicines/add','MedicineController@addMedicine');
 Route::post('/medicines/edit','MedicineController@editMedicine');
 
 Route::post('/journal/get','DayController@getDays');
+Route::any('/journal/available','FoodController@getFoods');
+Route::post('/journal/addEating','DayController@addEating');

@@ -11,6 +11,7 @@
   <script src="/js/angular.js"></script>
   <script src="/js/angular-sanitize.js"></script>
   <script src="/js/angular-table.js"></script>
+  <script src="/js/draganddrop.js"></script>
   <script src="/js/underscore.js"></script>
   <script src="/js/app.js"></script>
   <script src="/js/services.js"></script>

@@ -12,21 +12,33 @@
 	</div>
 	</form>
 </div>
-<ul class="large-block-grid-4">
-	<li ng-repeat="day in days">
-		<div class="usercal">
-			<h3>{{ day.when }}</h3>
-			<ul>
-				<li ng-repeat="cat in day.eatings" ng-click="foodShow = !foodShow"><span class="foodCategory" >{{ cat.name }}</span>
-					<ul ng-show="foodShow">
-						<li ng-repeat="food in cat.foods">{{ food.name }}</li>
+<div class="row">
+	<div class="large-2 columns">
+		<ul class="availList">
+			<li ng-repeat="c in available" ng-click="availShow = !availShow"><span class="availCategory" >{{ c.name }}</span>
+				<ul ng-hide="availShow">
+					<li ui-draggable="true" drag="f" ng-repeat="f in c.food">{{ f.name }}</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="large-10 columns">
+		<ul class="large-block-grid-3" >
+			<li ng-repeat="day in days">
+				<div ui-on-Drop="onDrop($event,$data,day)" class="usercal">
+					<h3>{{ day.when | date:'EEE, MMM d' }}</h3>
+					<ul>
+						<li ng-repeat="cat in day.eatings" ng-click="foodShow = !foodShow"><span class="foodCategory" >{{ cat.name }}({{ cat.entries }})</span>
+							<ul ng-show="foodShow">
+								<li ng-repeat="food in cat.foods">{{ food.name }}</li>
+							</ul>
+						</li>
 					</ul>
-				</li>
-			</ul>
-		</div>
-	</li>
-</ul>
-
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
 <div class="large-6 large-offset-3">
   <div ng-include=" 'templates/footer.html' "></div>
 </div>
