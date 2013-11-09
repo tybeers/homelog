@@ -138,6 +138,12 @@ app.factory("journalService", function($http,FlashService) {
                 getAvailableFoods: function() {
                    return $http.get('/journal/available');
                 },
+                addFood: function(food) {
+                  var promise = $http.post("/journal/addFood",food).then(function(d) {
+                    return d.data;
+                  });
+                  return promise;
+                },
                 addEating: function(added) {
                   var promise = $http.post("/journal/addEating",added).then(function(d) {
                     return d.data;

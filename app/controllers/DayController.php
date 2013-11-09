@@ -53,4 +53,5 @@ class DayController extends BaseController {
 		}
 		return Response::json($data);
 	}
+
 }

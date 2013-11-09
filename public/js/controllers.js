@@ -180,10 +180,11 @@ app.controller("journalController", function($scope, $location, journalService, 
   var mm = (tdate.getMonth()+1).toString(); // getMonth() is zero-based
   var dd1  = (tdate.getDate()-1).toString();
   var dd2 = (tdate.getDate()+1).toString();
-  var sdate = yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" +(dd1[1]?dd:"0"+dd1[0]);
-  var edate = yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" +(dd2[1]?dd:"0"+dd2[0]);
+  var sdate = yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" +(dd1[1]?dd1:"0"+dd1[0]);
+  var edate = yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" +(dd2[1]?dd2:"0"+dd2[0]);
   $scope.usercategory = { name: "" };
   $scope.range = { start_date: sdate, end_date: edate};
+  $scope.userfood = { name: "", category_id: "", family_id: "1", status_id: "1", notes: "" }
   $scope.available = foods.data;
   
   $scope.$watchCollection('range', function() { 
@@ -195,6 +196,18 @@ app.controller("journalController", function($scope, $location, journalService, 
       journalService.addEating(dropFood).then(function (d) {
         $scope.refreshDays();
       })
+    };
+
+    $scope.toggleVisibility = function(model) {
+            if ($scope.selected == model) {
+              $scope.selected = undefined;
+            } else {
+              $scope.selected = model;
+            };
+        };
+        
+    $scope.isVisible = function(model) {
+            return $scope.selected === model;
     };
 
     $scope.refreshDays = function() {
@@ -213,6 +226,14 @@ app.controller("journalController", function($scope, $location, journalService, 
       journalService.addCategory($scope.usercategory).then(function (d) {
         $scope.refreshDays();
         $scope.refreshFoods();
+        $scope.usercategory = { name: "" };
+      })
+    }
+
+    $scope.addFood = function() {
+      journalService.addFood($scope.userfood).then(function (d) {
+        $scope.refreshFoods(); //ToDo: push only new object instead of rebuilding
+        $scope.userfood = { name: "", category_id: "", family_id: "1", status_id: "1", notes: "" }
       })
     }
 });

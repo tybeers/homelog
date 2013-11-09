@@ -16,9 +16,12 @@
 	<div class="large-2 columns">
 		<h5>Food!</h5>
 		<ul class="availList">
-			<li ng-repeat="c in available" ng-click="availShow = !availShow"><span class="availCategory" >{{ !availShow | plusminus }} {{ c.name }}</span>
-				<ul ng-show="availShow">
+			<li ng-repeat="c in available"><span ng-click="toggleVisibility(c)" class="availCategory" >{{ !isVisible(c) | plusminus }} {{ c.name }}</span>
+				<ul ng-show="isVisible(c)">
 					<li ui-draggable="true" drag="f" ng-repeat="f in c.food">{{ f.name }}</li>
+					<li>
+						<form ng-submit="userfood.category_id = c.id; addFood()" ><input type="text" name="Food" placeholder="Food" ng-model="userfood.name" /></form>
+					</li>
 				</ul>
 			</li>
 		</ul>

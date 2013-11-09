@@ -15,6 +15,7 @@ class Food extends Eloquent {
          * @var array
          */
         protected $hidden = array();
+        public $timestamps = false;
 
 
 	public function eating()
