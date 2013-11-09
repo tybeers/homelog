@@ -16,6 +16,8 @@ class Category extends Eloquent {
          */
         protected $hidden = array();
 
+        public $timestamps = false;
+
 
 	public function food()
         {

@@ -14,13 +14,16 @@
 </div>
 <div class="row">
 	<div class="large-2 columns">
+		<h5>Food!</h5>
 		<ul class="availList">
-			<li ng-repeat="c in available" ng-click="availShow = !availShow"><span class="availCategory" >{{ c.name }}</span>
-				<ul ng-hide="availShow">
+			<li ng-repeat="c in available" ng-click="availShow = !availShow"><span class="availCategory" >{{ !availShow | plusminus }} {{ c.name }}</span>
+				<ul ng-show="availShow">
 					<li ui-draggable="true" drag="f" ng-repeat="f in c.food">{{ f.name }}</li>
 				</ul>
 			</li>
 		</ul>
+		<span ng-click="addCatShow = !addCatShow">{{ !addCatShow | plusminus }} Category</span>
+		<form ng-show="addCatShow" ng-submit="addCategory(); addCatShow = !addCatShow"><input type="text" name="Category" placeholder="Category" ng-model="usercategory.name" /></form>
 	</div>
 	<div class="large-10 columns">
 		<ul class="large-block-grid-3" >
@@ -28,8 +31,8 @@
 				<div ui-on-Drop="onDrop($event,$data,day)" class="usercal">
 					<h3>{{ day.when | date:'EEE, MMM d' }}</h3>
 					<ul>
-						<li ng-repeat="cat in day.eatings" ng-click="foodShow = !foodShow"><span class="foodCategory" >{{ cat.name }}({{ cat.entries }})</span>
-							<ul ng-show="foodShow">
+						<li ng-repeat="cat in day.eatings|orderObject:'id'" ng-click="foodShow = !foodShow"><span class="foodCategory" >{{ cat.name }}({{ cat.entries }})</span>
+							<ul ng-hide="foodShow">
 								<li ng-repeat="food in cat.foods">{{ food.name }}</li>
 							</ul>
 						</li>

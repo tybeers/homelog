@@ -175,13 +175,21 @@ app.controller("medicinesController", function($scope, $location, medicines, med
 });
 
 app.controller("journalController", function($scope, $location, journalService, foods) {
-  $scope.range = { start_date: '2013-11-03', end_date: '2013-11-07'};
+  var tdate = new Date();
+  var yyyy = tdate.getFullYear().toString();
+  var mm = (tdate.getMonth()+1).toString(); // getMonth() is zero-based
+  var dd1  = (tdate.getDate()-1).toString();
+  var dd2 = (tdate.getDate()+1).toString();
+  var sdate = yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" +(dd1[1]?dd:"0"+dd1[0]);
+  var edate = yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" +(dd2[1]?dd:"0"+dd2[0]);
+  $scope.usercategory = { name: "" };
+  $scope.range = { start_date: sdate, end_date: edate};
   $scope.available = foods.data;
   
   $scope.$watchCollection('range', function() { 
       $scope.refreshDays();
   })
-
+ 
   $scope.onDrop = function($event,$data,array){
       var dropFood = { day_id: array['id'], food_id: $data['id']};
       journalService.addEating(dropFood).then(function (d) {
@@ -193,5 +201,18 @@ app.controller("journalController", function($scope, $location, journalService, 
       journalService.getDays($scope.range).then(function (d) {
           $scope.days = d;
         });
+    }
+
+    $scope.refreshFoods = function() {
+      journalService.getAvailableFoods().then(function (d) {
+        $scope.available = d.data;
+      })
+    }
+
+    $scope.addCategory = function() {
+      journalService.addCategory($scope.usercategory).then(function (d) {
+        $scope.refreshDays();
+        $scope.refreshFoods();
+      })
     }
 });

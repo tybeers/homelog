@@ -31,8 +31,9 @@ class DayController extends BaseController {
 		$dates = DB::table('days')
 				->where('when','>=',Input::json('start_date'))
 				->where('when','<=',Input::json('end_date'))
+				->orderBy('when','ASC')
 				->get();
-		$categories = DB::table('categories')->get();
+		$categories = DB::table('categories')->orderBy('id','ASC')->get();
 		foreach ($dates as $value) {
 			foreach ($categories as $cat) {
 				$numfood = 0;
@@ -40,6 +41,7 @@ class DayController extends BaseController {
 				->join('foods', 'eatings.food_id','=','foods.id')
 				->where('foods.category_id','=',$cat->id)
 				->where('eatings.day_id','=',$value->id)
+				->orderBy('foods.category_id','ASC')
 				->get();
 				$numfood = count($food);
 				$sub[$count2] = array('id'=>$cat->id, 'name'=>$cat->name, 'entries'=>$numfood,'foods'=>$food);

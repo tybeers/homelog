@@ -40,3 +40,4 @@ Route::post('/medicines/edit','MedicineController@editMedicine');
 Route::post('/journal/get','DayController@getDays');
 Route::any('/journal/available','FoodController@getFoods');
 Route::post('/journal/addEating','DayController@addEating');
+Route::post('/journal/addCategory','FoodController@addCategory');

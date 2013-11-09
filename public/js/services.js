@@ -143,6 +143,12 @@ app.factory("journalService", function($http,FlashService) {
                     return d.data;
                   });
                   return promise;
+                },
+                addCategory: function(category) {
+                  var promise = $http.post("/journal/addCategory",category).then(function(d) {
+                    return d.data;
+                  });
+                  return promise;
                 }
           }
 });

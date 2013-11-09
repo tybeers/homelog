@@ -16,6 +16,8 @@ class Eating extends Eloquent {
          */
         protected $hidden = array();
 
+        public $timestamps = false;
+
         public function days()
         {
                 return $this->belongsTo('Day','day_id');
