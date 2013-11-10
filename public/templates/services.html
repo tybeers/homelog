@@ -1,11 +1,43 @@
 <div ng-include=" 'templates/menubar.html' "></div>
-<h3>History</h3>
 <div class="row">
-    <div class="small-2 small-offset-10 columns">
-        <button ng-click="hide()" class="button small expand radius">{{ buttonText }}</button>
+    <div>
+        <div class="large-12 columns">
+          <ul class="inline-list" >
+            <li><a href="#/servicetypes"><button class="button tiny secondary radius">ServiceType</button></a></li>
+            <li><a href="#/providers"><button class="button tiny secondary radius">Providers</button></a></li>
+          </ul>
+      </div>
     </div>
 </div>
-
+<div class="row">
+    <div class="large-12 columns">
+        <form>
+            <div ng-show="advSearch" class="large-3 columns">
+                <label>Start:</label><input type="date" name="Start" placeholder="start" ng-model="search.start" />
+            </div>
+            <div ng-show="advSearch" class="large-3 columns">
+                <label>End:</label><input type="date" name="Start" placeholder="End" ng-model="search.end" />
+            </div>
+            <div ng-show="advSearch" class="large-2 columns">
+                <label>Type:</label><select ng-model="search.type" ng-options="item.id as item.name for item in testTypes"> </select>
+            </div>
+            <div ng-show="advSearch" class="large-2 columns">
+                <label>Provider:</label><select ng-model="search.provider" ng-options="prov.id as prov.name for prov in providerList"></select>
+            </div>
+            <div class="large-2 columns">
+                <button class="button tiny secondary radius" ng-click="advSearch = !advSearch">{{ !advSearch | plusminus }}Adv. Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="large-4 columns">
+        <input ng-show="myValue" type="text" ng-model="searchBar" class="search-query" placeholder="Search">
+    </div>
+    <div class="large-2 large-offset-2 columns">
+        <button ng-click="hide()" class="button small radius">{{ buttonText }}</button>
+    </div>
+</div>
 <div ng-include=" 'templates/addservice.html' " ng-hide="myValue"></div>
 <div class="row" ng-show="myValue">
     <h3>Total: {{ total() | currency }}</h3>
@@ -55,7 +87,4 @@
         <column>{{ row.notes }}</input></column>
     </row>
 </angular-table>
-</div>
-<div class="large-6 large-offset-3">
-  <div ng-include=" 'templates/footer.html' "></div>
 </div>

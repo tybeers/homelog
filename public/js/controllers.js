@@ -85,7 +85,15 @@ app.controller("servicetypesController",function($scope, servicetypes, servicety
 
 app.controller("servicesController",function($scope, $location, services, servicesService, servicetypesService, providersService) {
 	$scope.services = services.data;
-  console.log($scope.services);
+  var tdate = new Date();
+  var yyyy = tdate.getFullYear().toString();
+  var mm1 = (tdate.getMonth()).toString(); // getMonth() is zero-based
+  var mm2 = (tdate.getMonth()+1).toString(); // getMonth() is zero-based
+  var dd1  = tdate.getDate().toString();
+  var dd2 = tdate.getDate().toString();
+  var sdate = yyyy + "-" + (mm1[1]?mm1:"0"+mm1[0]) + "-" +(dd1[1]?dd1:"0"+dd1[0]);
+  var edate = yyyy + "-" + (mm2[1]?mm2:"0"+mm2[0]) + "-" +(dd2[1]?dd2:"0"+dd2[0]);
+  $scope.search = {start: sdate, end: edate, type: "", provider: ""};
   $scope.total = function() {
     var total = 0.00;
     angular.forEach($scope.services, function(services) {
@@ -95,7 +103,7 @@ app.controller("servicesController",function($scope, $location, services, servic
   };
   $scope.userservice = { stype: "", start: "", end: "", provider: "", cost: "", note: ""};
   $scope.myValue =true;
-  $scope.buttonText = "Add New";
+  $scope.buttonText = "New";
   $scope.providerList = [];
   $scope.testTypes = [];
   servicetypesService.get().then(function(d) {
@@ -124,8 +132,8 @@ app.controller("servicesController",function($scope, $location, services, servic
 });
 
 app.controller("HomeController", function($scope, $location, AuthenticationService) {
-  $scope.title = "Choose your adventure";
-  $scope.message = "Click image to maintain";
+  $scope.title = "What is this?";
+  $scope.message = "What would you like to do?";
 
   $scope.logout = function() {
     AuthenticationService.logout().success(function() {
@@ -178,10 +186,12 @@ app.controller("journalController", function($scope, $location, journalService, 
   var tdate = new Date();
   var yyyy = tdate.getFullYear().toString();
   var mm = (tdate.getMonth()+1).toString(); // getMonth() is zero-based
+  var dd  = tdate.getDate().toString();
   var dd1  = (tdate.getDate()-1).toString();
   var dd2 = (tdate.getDate()+1).toString();
   var sdate = yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" +(dd1[1]?dd1:"0"+dd1[0]);
   var edate = yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" +(dd2[1]?dd2:"0"+dd2[0]);
+  $scope.today = yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" +(dd[1]?dd:"0"+dd[0]);
   $scope.usercategory = { name: "" };
   $scope.range = { start_date: sdate, end_date: edate};
   $scope.userfood = { name: "", category_id: "", family_id: "1", status_id: "1", notes: "" }
@@ -236,4 +246,5 @@ app.controller("journalController", function($scope, $location, journalService, 
         $scope.userfood = { name: "", category_id: "", family_id: "1", status_id: "1", notes: "" }
       })
     }
+
 });

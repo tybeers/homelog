@@ -87,7 +87,7 @@ app.config(function($routeProvider) {
     }
   });
 
-  $routeProvider.otherwise({ redirectTo: '/home' });
+  $routeProvider.otherwise({ redirectTo: '/login' });
 
 });
 

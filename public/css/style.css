@@ -36,6 +36,23 @@ body {
     list-style-type: none;
 }
 
+.caltoday {
+	background: #F5EDE3;
+	border:5px solid;
+	height: 350px;
+	width: 250px;
+	overflow: auto;
+}
+
+.caltoday h3 {
+	background: #f6b33d;
+}
+
+.caltoday ul
+{
+    list-style-type: none;
+}
+
 .sidebar {
 	height: 300px;
 	width: 250px;
