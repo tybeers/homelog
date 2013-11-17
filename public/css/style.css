@@ -117,3 +117,8 @@ body {
 
 .avaiList li {
 }
+
+#xbutton {
+	float: right;
+	padding: 0px 30px 0px 0px;
+}

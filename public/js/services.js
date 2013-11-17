@@ -150,6 +150,10 @@ app.factory("journalService", function($http,FlashService) {
                   });
                   return promise;
                 },
+                delEating: function(removed) {
+                  var del = $http.post("/journal/delEating", removed);
+                  return del;
+                },
                 addCategory: function(category) {
                   var promise = $http.post("/journal/addCategory",category).then(function(d) {
                     return d.data;

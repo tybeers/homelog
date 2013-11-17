@@ -93,17 +93,12 @@ app.controller("servicesController",function($scope, $location, services, servic
   var dd2 = tdate.getDate().toString();
   var sdate = yyyy + "-" + (mm1[1]?mm1:"0"+mm1[0]) + "-" +(dd1[1]?dd1:"0"+dd1[0]);
   var edate = yyyy + "-" + (mm2[1]?mm2:"0"+mm2[0]) + "-" +(dd2[1]?dd2:"0"+dd2[0]);
-  $scope.search = {start: sdate, end: edate, type: "", provider: ""};
-  $scope.total = function() {
-    var total = 0.00;
-    angular.forEach($scope.services, function(services) {
-      total += services.cost * 1;
-    });
-    return total;
-  };
-  $scope.userservice = { stype: "", start: "", end: "", provider: "", cost: "", note: ""};
   $scope.myValue =true;
   $scope.buttonText = "New";
+  $scope.search = {start: sdate, end: edate, type: "", provider: ""};
+  $scope.userservice = { stype: "", start: "", end: "", provider: "", cost: "", note: ""};
+  
+  var activeList = [];
   $scope.providerList = [];
   $scope.testTypes = [];
   servicetypesService.get().then(function(d) {
@@ -117,6 +112,31 @@ app.controller("servicesController",function($scope, $location, services, servic
         $scope.hide();
         $scope.services.push(d);
       })
+  };
+
+  $scope.searchFilter = function(row) {
+    if (row.start_date >= $scope.search.start && row.end_date <= $scope.search.end && (row.servicetype.id == $scope.search.type || $scope.search.type == "") && (row.provider.id == $scope.search.provider || $scope.search.provider == ""))
+    {
+        activeList.push(row);
+    }
+    return row.start_date >= $scope.search.start && row.end_date <= $scope.search.end && (row.servicetype.id == $scope.search.type || $scope.search.type == "") && (row.provider.id == $scope.search.provider || $scope.search.provider == "");
+  };
+
+  $scope.totalSearch = function() {
+    var total = 0.00;
+    angular.forEach(activeList, function(services) {
+      total += services.cost * 1;
+    });
+    activeList = [];
+    return total;
+  };
+
+  $scope.total = function() {
+    var total = 0.00;
+    angular.forEach($scope.services, function(services) {
+      total += services.cost * 1;
+    });
+    return total;
   };
 
   $scope.hide = function() {
@@ -204,6 +224,14 @@ app.controller("journalController", function($scope, $location, journalService, 
   $scope.onDrop = function($event,$data,array){
       var dropFood = { day_id: array['id'], food_id: $data['id']};
       journalService.addEating(dropFood).then(function (d) {
+        $scope.refreshDays();
+      })
+    };
+
+    $scope.delEating = function(index) {
+      console.log(index);
+      var removed = { 'id': index };
+      journalService.delEating(removed).then(function () {
         $scope.refreshDays();
       })
     };

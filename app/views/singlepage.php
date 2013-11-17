@@ -11,7 +11,6 @@
   <script src="/js/jquery-2.0.3.min.js"></script>
   <script src="/js/angular.js"></script>
   <script src="/js/angular-sanitize.js"></script>
-  <script src="/js/angular-table.js"></script>
   <script src="/js/angular-route.min.js"></script>
   <script src="/js/draganddrop.js"></script>
   <script src="/js/underscore.js"></script>

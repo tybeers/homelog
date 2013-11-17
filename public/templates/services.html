@@ -40,51 +40,31 @@
 </div>
 <div ng-include=" 'templates/addservice.html' " ng-hide="myValue"></div>
 <div class="row" ng-show="myValue">
-    <h3>Total: {{ total() | currency }}</h3>
+    <h3>Total: {{ totalSearch() | currency }}</h3>
 <div class="large-12">
 
-<angular-table model="services" default-sort-column="end_date">
-    <header-row>
-        <header-column sortable="true" sort-field-name="start_date">
-            <div style="display: inline-block;">Started</div>
-            <sort-arrow-ascending></sort-arrow-ascending>
-            <sort-arrow-descending></sort-arrow-descending>
-        </header-column>
-        <header-column sortable="true" sort-field-name="end_date">
-            <div style="display: inline-block;">Finished</div>
-            <sort-arrow-ascending></sort-arrow-ascending>
-            <sort-arrow-descending></sort-arrow-descending>
-        </header-column>
-        <header-column sortable="true" sort-field-name="provider.name">
-            <div style="display: inline-block;">Provider</div>
-            <sort-arrow-ascending></sort-arrow-ascending>
-            <sort-arrow-descending></sort-arrow-descending>
-        </header-column>
-        <header-column sortable="true" sort-field-name="cost">
-            <div style="display: inline-block;">Cost</div>
-            <sort-arrow-ascending></sort-arrow-ascending>
-            <sort-arrow-descending></sort-arrow-descending>
-        </header-column>
-	<header-column sortable="true" sort-field-name="servicetype.name">
-            <div style="display: inline-block;">Type</div>
-            <sort-arrow-ascending></sort-arrow-ascending>
-            <sort-arrow-descending></sort-arrow-descending>
-        </header-column>
-        <header-column sortable="true" sort-field-name="notes">
-            <div style="display: inline-block;">Note</div>
-            <sort-arrow-ascending></sort-arrow-ascending>
-            <sort-arrow-descending></sort-arrow-descending>
-        </header-column>
-    </header-row>
 
-    <row on-selected="handleRowSelection(row)" selected-color="#87cefa" 
-        even-color="#ffffff" odd-color="#eeeeee">
-        <column>{{ row.start_date }}</column>
-        <column>{{ row.end_date }}</column>
-        <column>{{ row.provider.name }}</column>
-	<column>{{ row.cost | currency }}</column>
-	<column>{{ row.servicetype.name }}</column>
-        <column>{{ row.notes }}</input></column>
-    </row>
-</angular-table>
+<table>
+    <thead>
+        <tr>
+            <th ng-click="reverse = predicate == 'start_date' && !reverse; predicate = 'start_date'">Started</th>
+            <th ng-click="reverse = predicate == 'end_date' && !reverse; predicate = 'end_date'">Finished</th>
+            <th ng-click="reverse = predicate == 'provider.name' && !reverse; predicate = 'provider.name'">Provider</th>
+            <th ng-click="reverse = predicate == 'cost' && !reverse; predicate = 'cost'">Cost</th>
+            <th ng-click="reverse = predicate == 'servicetype.name' && !reverse; predicate = 'servicetype.name'">Type</th>
+            <th ng-click="reverse = predicate == 'notes' && !reverse; predicate = 'notes'">Note</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="service in services | filter:searchFilter | filter:searchBar | orderBy:predicate:reverse ">
+            <td>{{ service.start_date }}</td>
+            <td>{{ service.end_date }}</td>
+            <td>{{ service.provider.name }}</td>
+            <td>{{ service.cost | currency }}</td>
+            <td>{{ service.servicetype.name }}</td>
+            <td>{{ service.notes }}</td>
+        </tr>
+    </tbody>
+</table>
+
 </div>

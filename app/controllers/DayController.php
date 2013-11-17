@@ -23,6 +23,15 @@ class DayController extends BaseController {
 		}
 	}
 
+	public function delEating() {
+		try {
+			$eat = DB::table('eatings')->where('id','=',Input::json('id'))->delete();
+			return Response::json(array('flash'=>'Deleted'));
+		} catch (Exception $e) {
+			return Response::json(array('flash'=>'Delete Failed: '.$e),500);
+		}
+	}
+
 	public function getDays() {
 		$data = [];
 		$sub = [];
@@ -42,7 +51,7 @@ class DayController extends BaseController {
 				->where('foods.category_id','=',$cat->id)
 				->where('eatings.day_id','=',$value->id)
 				->orderBy('foods.category_id','ASC')
-				->get();
+				->get(array('foods.name', 'eatings.id', 'eatings.food_id'));
 				$numfood = count($food);
 				$sub[$count2] = array('id'=>$cat->id, 'name'=>$cat->name, 'entries'=>$numfood,'foods'=>$food);
 				$count2++;			

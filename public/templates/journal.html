@@ -36,7 +36,7 @@
 					<ul>
 						<li ng-repeat="cat in day.eatings|orderObject:'id'"><span ng-click="foodShow = !foodShow" class="foodCategory" >{{ cat.name }}({{ cat.entries }})</span>
 							<ul ng-hide="foodShow">
-								<li ng-repeat="food in cat.foods">{{ food.name }}</li>
+								<li ng-repeat="food in cat.foods">{{ food.name }}<div id="xbutton"><img src="img/x.png" ng-click="delEating(food.id)" /></div></li>
 							</ul>
 						</li>
 					</ul>

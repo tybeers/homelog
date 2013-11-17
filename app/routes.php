@@ -42,3 +42,4 @@ Route::any('/journal/available','FoodController@getFoods');
 Route::post('/journal/addEating','DayController@addEating');
 Route::post('/journal/addCategory','FoodController@addCategory');
 Route::post('/journal/addFood','FoodController@addFood');
+Route::post('/journal/delEating','DayController@delEating');
